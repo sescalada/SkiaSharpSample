@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SkiaSharpDemo.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SkiaSharpDemo">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{OnPlatform Default=Default, iOS=Small}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Margin="20" Spacing="10">
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+            <Label Style="{StaticResource LabelStyle}" Text="Progress: " />
+            <Slider
+                x:Name="progressSlider"
+                HorizontalOptions="FillAndExpand"
+                Maximum="1"
+                MaximumTrackColor="Green"
+                Minimum="0"
+                MinimumTrackColor="Black"
+                Value="0.5" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+            <Label Style="{StaticResource LabelStyle}" Text="Rounded borders: " />
+            <Switch x:Name="roundedBordersSwitch" IsToggled="False" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+            <Label Style="{StaticResource LabelStyle}" Text="Show label: " />
+            <Switch x:Name="showLabelSwitch" IsToggled="False" />
+        </StackLayout>
+        <Label Style="{StaticResource LabelStyle}" Text="{Binding Progress, Source={x:Reference bar}, StringFormat='Current progress is: \{0:N1}', Mode=OneWay}" />
+        <local:GradientBar
+            x:Name="bar"
+            BackColor="Gray"
+            DrawLabel="{Binding IsToggled, Source={x:Reference showLabelSwitch}, Mode=OneWay}"
+            FrontColorFrom="Yellow"
+            FrontColorTo="Green"
+            HeightRequest="80"
+            HorizontalOptions="Center"
+            Progress="{Binding Value, Source={x:Reference progressSlider}, Mode=OneWay}"
+            UseRoundedBorders="{Binding IsToggled, Source={x:Reference roundedBordersSwitch}, Mode=OneWay}"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="400" />
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,9 @@
+.vs/
+bin/
+obj/
+
+*.user
+*.orig
+UpgradeLog.htm
+UpgradeLog2.htm
+StyleCop.Cache
